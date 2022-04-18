@@ -3,7 +3,6 @@ import { Navigate, useLocation, useRoutes } from 'react-router-dom';
 
 import { Spin } from 'antd';
 
-import DashboardMain from '@pages/dashboard/DashboardMain';
 import DashboardLayout from '@layouts/index';
 // ----------------------------------------------------------------------
 
@@ -28,27 +27,24 @@ export default function Router() {
       children: [
         { element: <Navigate to="/home" replace /> },
         { path: 'home', element: <Home /> },
+        { path: 'dashboard/summary', element: <Summary /> },
         {
-          path: 'dashboard',
-          element: <DashboardMain />,
-          children: [
-            { element: <Navigate to="/dashboard/summary" replace /> },
-            { path: 'summary', element: <Summary /> },
-            { path: 'cognitive-training', element: <CongnitiveTraninig /> },
-            { path: 'life-management', element: <LifeManagement /> },
-          ],
+          path: 'dashboard/cognitive-training',
+          element: <CongnitiveTraninig />,
         },
+        { path: 'dashboard/life-management', element: <LifeManagement /> },
       ],
     },
   ]);
 }
 
-// Main
 const Home = Loadable(lazy(() => import('@pages/home/Home')));
-const Summary = Loadable(lazy(() => import('@pages/summary/Summary')));
+const Summary = Loadable(
+  lazy(() => import('@pages/dashboard/summary/Summary'))
+);
 const CongnitiveTraninig = Loadable(
-  lazy(() => import('@pages/cognitiveTraining/CognitiveTraining'))
+  lazy(() => import('@pages/dashboard/cognitiveTraining/CognitiveTraining'))
 );
 const LifeManagement = Loadable(
-  lazy(() => import('@pages/lifeManagement/LifeManagement'))
+  lazy(() => import('@pages/dashboard/lifeManagement/LifeManagement'))
 );
