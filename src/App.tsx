@@ -1,14 +1,10 @@
 import React from 'react';
 
 import './App.less';
-import { Button } from 'antd';
+import Router from './routes';
 
 function App() {
-  return (
-    <Button className="test" type="primary">
-      Button
-    </Button>
-  );
+  return <Router />;
 }
 
 export default App;
