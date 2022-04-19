@@ -1,5 +1,5 @@
 import { Card, Col, Image, Row, Space, Statistic, Typography } from 'antd';
-import { ReportIcon } from '@assets/icons';
+import { ReportIcon } from '@/assets/index';
 import { FieldTimeOutlined, HeartOutlined } from '@ant-design/icons';
 
 import {
@@ -10,8 +10,10 @@ import {
   rightChartData,
 } from '../../../mockData';
 
-import { leftChartColorScale, rightChartColorScale } from '@constants/chart';
-import DonutChart from '@components/DonutChart';
+import { leftChartColorScale, rightChartColorScale } from '@/constants/chart';
+import DonutChart from '@/components/DonutChart';
+import { useWindowSize } from '@/hooks/useWindowSize';
+import { breakpoints } from '@/constants/breakpoints';
 
 // import styles from './Summary.less';
 
@@ -19,11 +21,11 @@ const summaryPrimaryStatistics = [
   {
     title: '평균 출석일 수',
     value: `${attendanceDays}일`,
-    img: <Image src={ReportIcon} width={90} preview={false} />,
+    img: <Image src={ReportIcon} width={95} preview={false} />,
   },
   {
     title: '평균 접속 시간',
-    value: `${averageAccessTime[0]} 시간 ${averageAccessTime[1]}분`,
+    value: `${averageAccessTime[0]}시간 ${averageAccessTime[1]}분`,
     img: (
       <FieldTimeOutlined
         style={{ fontSize: 67, color: '#757575', padding: 15 }}
@@ -39,9 +41,9 @@ const summaryPrimaryStatistics = [
   },
 ];
 
-type Props = {};
+function Summary() {
+  const { width } = useWindowSize();
 
-function Summary({}: Props) {
   return (
     <>
       <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
@@ -66,7 +68,12 @@ function Summary({}: Props) {
                     </Typography>
                   }
                   value={item.value}
-                  valueStyle={{ fontSize: 38, fontWeight: 500, marginTop: 15 }}
+                  valueStyle={{
+                    fontSize: width && width < breakpoints.xl ? 20 : 38,
+                    fontWeight: 500,
+                    marginTop: 15,
+                  }}
+                  style={{ marginLeft: 15 }}
                 />
               </Space>
             </Col>
