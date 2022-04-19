@@ -15,9 +15,7 @@ import DonutChart from '@/components/DonutChart';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { breakpoints } from '@/constants/breakpoints';
 
-// import styles from './Summary.less';
-
-const summaryPrimaryStatistics = [
+const summaryPrimaryStatisticsData = [
   {
     title: '평균 출석일 수',
     value: `${attendanceDays}일`,
@@ -41,13 +39,26 @@ const summaryPrimaryStatistics = [
   },
 ];
 
+const summaryChartData = [
+  {
+    title: '사용자 분포추이 - 성별',
+    chartData: leftChartData,
+    colorScale: leftChartColorScale,
+  },
+  {
+    title: '사용자 분포추이 - 성별',
+    chartData: rightChartData,
+    colorScale: rightChartColorScale,
+  },
+];
+
 function Summary() {
   const { width } = useWindowSize();
 
   return (
     <>
-      <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
-        {summaryPrimaryStatistics.map((item) => {
+      <Row gutter={16} style={{ marginBottom: 32 }}>
+        {summaryPrimaryStatisticsData.map((item) => {
           return (
             <Col key={item.title} xs={24} md={12} lg={8}>
               <Space
@@ -80,31 +91,23 @@ function Summary() {
           );
         })}
       </Row>
-      <Row gutter={[16, 16]}>
-        <Col md={24} lg={12}>
-          <Card
-            title="사용자 분포추이 - 성별"
-            headStyle={{ fontWeight: 'bold' }}
-            style={{ backgroundColor: 'white', height: '100%' }}
-          >
-            <DonutChart
-              chartData={leftChartData}
-              colorScale={leftChartColorScale}
-            />
-          </Card>
-        </Col>
-        <Col md={24} lg={12}>
-          <Card
-            title="사용자 분포추이 - 연령대"
-            headStyle={{ fontWeight: 'bold' }}
-            style={{ backgroundColor: 'white', height: '100%' }}
-          >
-            <DonutChart
-              chartData={rightChartData}
-              colorScale={rightChartColorScale}
-            />
-          </Card>
-        </Col>
+      <Row gutter={16}>
+        {summaryChartData.map((item) => {
+          return (
+            <Col md={24} lg={12}>
+              <Card
+                title={item.title}
+                headStyle={{ fontWeight: 'bold' }}
+                style={{ backgroundColor: 'white', height: '100%' }}
+              >
+                <DonutChart
+                  chartData={item.chartData}
+                  colorScale={item.colorScale}
+                />
+              </Card>
+            </Col>
+          );
+        })}
       </Row>
     </>
   );
