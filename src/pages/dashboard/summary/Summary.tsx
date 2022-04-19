@@ -47,7 +47,7 @@ function Summary({}: Props) {
       <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
         {summaryPrimaryStatistics.map((item) => {
           return (
-            <Col xs={24} md={12} lg={8}>
+            <Col key={item.title} xs={24} md={12} lg={8}>
               <Space
                 style={{
                   width: '100%',
