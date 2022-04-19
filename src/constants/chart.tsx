@@ -1,5 +1,3 @@
-//Summary
-
 export const leftChartColorScale = ['#FF7875', '#788CFF'];
 
 export const rightChartColorScale = [
