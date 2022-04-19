@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 
 import { Avatar, Layout, Menu, Space, Typography } from 'antd';
-import { LaptopOutlined, UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 
 import { PATH_SIMPLE } from '@/routes/path';
 import { useState } from 'react';
@@ -21,7 +21,7 @@ const DashboardLayout = () => {
   const [selectedItem, setSelectedItem] = useState<string>('');
 
   return (
-    <Layout style={{ height: '100vh' }}>
+    <Layout style={{ minHeight: '100vh' }}>
       <Header style={{ backgroundColor: 'white' }}>
         <Space>
           <Avatar size="large" icon={<UserOutlined />} />
@@ -45,7 +45,6 @@ const DashboardLayout = () => {
           >
             <Menu.Item
               key="sub1"
-              icon={<UserOutlined />}
               onClick={() => navigate(PATH_SIMPLE.home)}
               style={{
                 margin: 0,
@@ -56,12 +55,7 @@ const DashboardLayout = () => {
             >
               홈
             </Menu.Item>
-            <SubMenu
-              key="sub2"
-              icon={<LaptopOutlined />}
-              title="대시보드"
-              style={{ color: 'white' }}
-            >
+            <SubMenu key="sub2" title="대시보드" style={{ color: 'white' }}>
               {dashboardSubMenuInfo.map((item, index) => {
                 return (
                   <Menu.Item
