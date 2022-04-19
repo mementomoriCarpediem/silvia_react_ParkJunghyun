@@ -57,7 +57,7 @@ function Summary() {
 
   return (
     <>
-      <Row gutter={16} style={{ marginBottom: 32 }}>
+      <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
         {summaryPrimaryStatisticsData.map((item) => {
           return (
             <Col key={item.title} xs={24} md={12} lg={8}>
@@ -91,7 +91,7 @@ function Summary() {
           );
         })}
       </Row>
-      <Row gutter={16}>
+      <Row gutter={[16, 16]}>
         {summaryChartData.map((item) => {
           return (
             <Col md={24} lg={12}>
