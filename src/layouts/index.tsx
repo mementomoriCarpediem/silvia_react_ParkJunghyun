@@ -1,12 +1,10 @@
-import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 import { Avatar, Layout, Menu, Space, Typography } from 'antd';
-
 import { LaptopOutlined, UserOutlined } from '@ant-design/icons';
 
 import { PATH_SIMPLE } from '@routes/path';
-import styles from './index.less';
+import { useState } from 'react';
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -17,10 +15,10 @@ const dashboardSubMenuInfo = [
   { title: '생활관리', path: PATH_SIMPLE.life_management },
 ];
 
-type Props = {};
-
-const DashboardLayout = (props: Props) => {
+const DashboardLayout = () => {
   const navigate = useNavigate();
+
+  const [selectedItem, setSelectedItem] = useState<string>('');
 
   return (
     <Layout style={{ height: '100vh' }}>
@@ -36,24 +34,34 @@ const DashboardLayout = (props: Props) => {
             mode="inline"
             defaultSelectedKeys={['sub1']}
             defaultOpenKeys={['sub2']}
-            theme="dark"
-            // className="dashboardMenu"
-            // className={styles.dashboardMenu}
             style={{
               height: '100%',
               backgroundColor: '#100E66',
               padding: 5,
             }}
+            onClick={(e) =>
+              setSelectedItem(e.domEvent.currentTarget.textContent ?? '')
+            }
           >
             <Menu.Item
               key="sub1"
               icon={<UserOutlined />}
               onClick={() => navigate(PATH_SIMPLE.home)}
-              style={{ margin: 0, width: '100%', color: 'white' }}
+              style={{
+                margin: 0,
+                width: '100%',
+                color: 'white',
+                backgroundColor: selectedItem === '홈' ? '#4D61FF' : '#100E66',
+              }}
             >
               홈
             </Menu.Item>
-            <SubMenu key="sub2" icon={<LaptopOutlined />} title="대시보드">
+            <SubMenu
+              key="sub2"
+              icon={<LaptopOutlined />}
+              title="대시보드"
+              style={{ color: 'white' }}
+            >
               {dashboardSubMenuInfo.map((item, index) => {
                 return (
                   <Menu.Item
@@ -61,7 +69,8 @@ const DashboardLayout = (props: Props) => {
                     onClick={() => navigate(item.path)}
                     style={{
                       color: 'white',
-                      backgroundColor: '#100E66',
+                      backgroundColor:
+                        selectedItem === item.title ? '#4D61FF' : '#100E66',
                       margin: 0,
                     }}
                   >
