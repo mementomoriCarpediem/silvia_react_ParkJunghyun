@@ -1,68 +1,78 @@
-import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import React from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import { Avatar, Layout, Menu, Space, Typography } from 'antd';
 
-import {
-  LaptopOutlined,
-  NotificationOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { LaptopOutlined, UserOutlined } from '@ant-design/icons';
 
-// import DashBoardNavbar from './DashBoardNavbar';
-// import DashBoardSidebar from './DashBoardSidebar';
+import { PATH_SIMPLE } from '@routes/path';
+import styles from './index.less';
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
+const dashboardSubMenuInfo = [
+  { title: '요약', path: PATH_SIMPLE.summary },
+  { title: '인지훈련', path: PATH_SIMPLE.cognitive_training },
+  { title: '생활관리', path: PATH_SIMPLE.life_management },
+];
+
 type Props = {};
 
 const DashboardLayout = (props: Props) => {
+  const navigate = useNavigate();
+
   return (
-    <Layout>
+    <Layout style={{ height: '100vh' }}>
       <Header style={{ backgroundColor: 'white' }}>
         <Space>
           <Avatar size="large" icon={<UserOutlined />} />
-          <Typography>박정현</Typography>
+          <Typography className="userName">박정현</Typography>
         </Space>
       </Header>
       <Layout>
-        <Sider
-          width={200}
-          style={{ backgroundColor: '#100E66' }}
-          className="site-layout-background"
-        >
+        <Sider width={200}>
           <Menu
             mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            style={{ height: '100%', borderRight: 0 }}
+            defaultSelectedKeys={['sub1']}
+            defaultOpenKeys={['sub2']}
+            theme="dark"
+            // className="dashboardMenu"
+            // className={styles.dashboardMenu}
+            style={{
+              height: '100%',
+              backgroundColor: '#100E66',
+              padding: 5,
+            }}
           >
-            <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-              <Menu.Item key="1">option1</Menu.Item>
-              <Menu.Item key="2">option2</Menu.Item>
-              <Menu.Item key="3">option3</Menu.Item>
-              <Menu.Item key="4">option4</Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-              <Menu.Item key="5">option5</Menu.Item>
-              <Menu.Item key="6">option6</Menu.Item>
-              <Menu.Item key="7">option7</Menu.Item>
-              <Menu.Item key="8">option8</Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub3"
-              icon={<NotificationOutlined />}
-              title="subnav 3"
+            <Menu.Item
+              key="sub1"
+              icon={<UserOutlined />}
+              onClick={() => navigate(PATH_SIMPLE.home)}
+              style={{ margin: 0, width: '100%', color: 'white' }}
             >
-              <Menu.Item key="9">option9</Menu.Item>
-              <Menu.Item key="10">option10</Menu.Item>
-              <Menu.Item key="11">option11</Menu.Item>
-              <Menu.Item key="12">option12</Menu.Item>
+              홈
+            </Menu.Item>
+            <SubMenu key="sub2" icon={<LaptopOutlined />} title="대시보드">
+              {dashboardSubMenuInfo.map((item, index) => {
+                return (
+                  <Menu.Item
+                    key={item.title}
+                    onClick={() => navigate(item.path)}
+                    style={{
+                      color: 'white',
+                      backgroundColor: '#100E66',
+                      margin: 0,
+                    }}
+                  >
+                    {item.title}
+                  </Menu.Item>
+                );
+              })}
             </SubMenu>
           </Menu>
         </Sider>
-        <Layout style={{ padding: '0 24px 24px' }}>
+        <Layout>
           <Content
             className="site-layout-background"
             style={{
