@@ -8,12 +8,17 @@ import DashboardLayout from '@layouts/index';
 
 const Loadable = (Component: React.ElementType) => (props: any) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { pathname } = useLocation();
-
-  console.log('[routes(index)/ Loadable] present pathName :', pathname);
+  // const { pathname } = useLocation();
+  // console.log('[routes(index)/ Loadable] present pathName :', pathname);
 
   return (
-    <Suspense fallback={<Spin />}>
+    <Suspense
+      fallback={
+        <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
+          <Spin />
+        </div>
+      }
+    >
       <Component {...props} />
     </Suspense>
   );
