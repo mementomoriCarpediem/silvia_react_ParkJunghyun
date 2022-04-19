@@ -4,7 +4,7 @@ import { VictoryLegend, VictoryPie } from 'victory';
 import {
   calculateChartDataSum,
   getLegendDataFromChartData,
-} from '@utils/index';
+} from '@/utils/index';
 
 type Props = {
   chartData: { x: string; y: number }[];

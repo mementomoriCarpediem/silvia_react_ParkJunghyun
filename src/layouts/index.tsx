@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { Avatar, Layout, Menu, Space, Typography } from 'antd';
 import { LaptopOutlined, UserOutlined } from '@ant-design/icons';
 
-import { PATH_SIMPLE } from '@routes/path';
+import { PATH_SIMPLE } from '@/routes/path';
 import { useState } from 'react';
 
 const { Header, Content, Sider } = Layout;
