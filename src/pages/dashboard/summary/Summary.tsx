@@ -46,7 +46,7 @@ const summaryChartData = [
     colorScale: leftChartColorScale,
   },
   {
-    title: '사용자 분포추이 - 성별',
+    title: '사용자 분포추이 - 연령대',
     chartData: rightChartData,
     colorScale: rightChartColorScale,
   },
@@ -94,7 +94,7 @@ function Summary() {
       <Row gutter={[16, 16]}>
         {summaryChartData.map((item) => {
           return (
-            <Col md={24} lg={12}>
+            <Col key={item.title} md={24} lg={12}>
               <Card
                 title={item.title}
                 headStyle={{ fontWeight: 'bold' }}
