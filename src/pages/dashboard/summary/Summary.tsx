@@ -1,7 +1,19 @@
-import React from 'react';
+import { useMemo } from 'react';
+
 import { Card, Col, Image, Row, Space, Typography } from 'antd';
-import { ReportIcon } from '../../../assets/icons';
+import { ReportIcon } from '@assets/icons';
 import { FieldTimeOutlined, HeartOutlined } from '@ant-design/icons';
+import { VictoryPie, VictoryLegend } from 'victory';
+import {
+  attendanceDays,
+  averageAccessTime,
+  averageActivityCount,
+  leftChartData,
+  rightChartData,
+} from '../../../mockData';
+import { calculateChartDataSum } from '@utils/index';
+import { leftChartColorScale, rightChartColorScale } from '@constants/chart';
+import DonutChart from '@components/DonutChart';
 
 // import styles from './Summary.less';
 
@@ -10,6 +22,15 @@ const { Title } = Typography;
 type Props = {};
 
 function Summary({}: Props) {
+  const leftChartDataSum = useMemo(
+    () => calculateChartDataSum(leftChartData),
+    []
+  );
+  const rightChartDataSum = useMemo(
+    () => calculateChartDataSum(rightChartData),
+    []
+  );
+
   return (
     <>
       <Row gutter={[16, 16]} style={{ marginBottom: 32, height: '25%' }}>
@@ -25,7 +46,7 @@ function Summary({}: Props) {
             <Image src={ReportIcon} width={90} preview={false} />
             <Space direction="vertical">
               <Typography style={{ fontSize: 16 }}>평균 출석일 수</Typography>
-              <Title style={{ margin: 0 }}>00 일</Title>
+              <Title style={{ margin: 0 }}>{attendanceDays} 일</Title>
             </Space>
           </Space>
         </Col>
@@ -43,7 +64,9 @@ function Summary({}: Props) {
             />
             <Space direction="vertical">
               <Typography style={{ fontSize: 16 }}>평균 접속 시간</Typography>
-              <Title style={{ margin: 0 }}>00 시간 00분</Title>
+              <Title style={{ margin: 0 }}>
+                {averageAccessTime[0]} 시간 {averageAccessTime[1]}분
+              </Title>
             </Space>
           </Space>
         </Col>
@@ -61,7 +84,7 @@ function Summary({}: Props) {
             />
             <Space direction="vertical">
               <Typography style={{ fontSize: 16 }}>평균 활동 횟수</Typography>
-              <Title style={{ margin: 0 }}>00회</Title>
+              <Title style={{ margin: 0 }}>{averageActivityCount}회</Title>
             </Space>
           </Space>
         </Col>
@@ -73,7 +96,10 @@ function Summary({}: Props) {
             headStyle={{ fontWeight: 'bold' }}
             style={{ backgroundColor: 'white', height: '100%' }}
           >
-            <p>Card content</p>
+            <DonutChart
+              chartData={leftChartData}
+              colorScale={leftChartColorScale}
+            />
           </Card>
         </Col>
         <Col span={12}>
@@ -82,7 +108,10 @@ function Summary({}: Props) {
             headStyle={{ fontWeight: 'bold' }}
             style={{ backgroundColor: 'white', height: '100%' }}
           >
-            <p>Card content</p>
+            <DonutChart
+              chartData={rightChartData}
+              colorScale={rightChartColorScale}
+            />
           </Card>
         </Col>
       </Row>
