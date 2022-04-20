@@ -25,13 +25,12 @@ yarn start
 
 ## 주요 기능 및 특징
 1. React Router v6 내, useRoutes(), useNavigation()을 활용한 라우팅
-2. Absolute Path & Path Alias 적용 (with `craco`)
-3. Layout component with `Outlet` from `react-router-dom`
-4. Ant Design 기본 UI 컴포넌트 및 스타일 적용
-5. Victory Donut Chart 구현 
-6. responsive UI in Summary Page
-7. webpack config override with craco(path alias & less setting"
-8. custom hook for detecting change of browser width
+2. Layout component with `Outlet` from `react-router-dom`
+3. Ant Design 기본 UI 컴포넌트 및 스타일 적용
+4. Victory Donut Chart 구현 
+5. responsive UI in Summary Page
+6. webpack config override with craco(path alias & less setting"
+7. custom hook for detecting change of browser width
  
 
 
