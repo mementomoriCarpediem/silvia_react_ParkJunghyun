@@ -61,16 +61,7 @@ function Summary() {
         {summaryPrimaryStatisticsData.map((item) => {
           return (
             <Col key={item.title} xs={24} md={12} lg={8}>
-              <Space
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  backgroundColor: 'white',
-                  paddingLeft: 20,
-                  paddingTop: 30,
-                  paddingBottom: 30,
-                }}
-              >
+              <Space style={statisticContainerStyle}>
                 {item.img}
                 <Statistic
                   title={
@@ -112,5 +103,14 @@ function Summary() {
     </>
   );
 }
+
+const statisticContainerStyle = {
+  width: '100%',
+  height: '100%',
+  backgroundColor: 'white',
+  paddingLeft: 20,
+  paddingTop: 30,
+  paddingBottom: 30,
+};
 
 export default Summary;
