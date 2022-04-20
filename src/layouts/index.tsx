@@ -34,11 +34,7 @@ const DashboardLayout = () => {
             mode="inline"
             defaultSelectedKeys={['sub1']}
             defaultOpenKeys={['sub2']}
-            style={{
-              height: '100%',
-              backgroundColor: '#100E66',
-              padding: 5,
-            }}
+            style={{ height: '100%', backgroundColor: '#100E66', padding: 5 }}
             onClick={(e) => setSelectedItem(e.key)}
           >
             <Menu.Item
@@ -74,13 +70,7 @@ const DashboardLayout = () => {
           </Menu>
         </Sider>
         <Layout>
-          <Content
-            style={{
-              padding: 24,
-              margin: 0,
-              minHeight: 280,
-            }}
-          >
+          <Content style={{ padding: 24, margin: 0, minHeight: 280 }}>
             <Outlet />
           </Content>
         </Layout>
