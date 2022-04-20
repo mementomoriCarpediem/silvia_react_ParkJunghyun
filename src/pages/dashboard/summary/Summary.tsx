@@ -57,15 +57,19 @@ function Summary() {
 
   return (
     <>
-      <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
+      <Row
+        gutter={[16, 16]}
+        style={{ marginBottom: 32 }}
+        className="summary_upperlow"
+      >
         {summaryPrimaryStatisticsData.map((item) => {
           return (
             <Col key={item.title} xs={24} md={12} lg={8}>
-              <Space style={statisticContainerStyle}>
+              <Space className="statisticContainer">
                 {item.img}
                 <Statistic
                   title={
-                    <Typography style={{ fontSize: 16 }}>
+                    <Typography className="statisticTitle">
                       {item.title}
                     </Typography>
                   }
@@ -82,7 +86,7 @@ function Summary() {
           );
         })}
       </Row>
-      <Row gutter={[16, 16]}>
+      <Row gutter={[16, 16]} className="summary_downlow">
         {summaryChartData.map((item) => {
           return (
             <Col key={item.title} md={24} lg={12}>
@@ -103,14 +107,5 @@ function Summary() {
     </>
   );
 }
-
-const statisticContainerStyle = {
-  width: '100%',
-  height: '100%',
-  backgroundColor: 'white',
-  paddingLeft: 20,
-  paddingTop: 30,
-  paddingBottom: 30,
-};
 
 export default Summary;
