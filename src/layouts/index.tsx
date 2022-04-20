@@ -39,32 +39,30 @@ const DashboardLayout = () => {
               backgroundColor: '#100E66',
               padding: 5,
             }}
-            onClick={(e) =>
-              setSelectedItem(e.domEvent.currentTarget.textContent ?? '')
-            }
+            onClick={(e) => setSelectedItem(e.key)}
           >
             <Menu.Item
-              key="sub1"
+              key="1"
               onClick={() => navigate(PATH_SIMPLE.home)}
               style={{
                 margin: 0,
                 width: '100%',
                 color: 'white',
-                backgroundColor: selectedItem === '홈' ? '#4D61FF' : '#100E66',
+                backgroundColor: selectedItem === '1' ? '#4D61FF' : '#100E66',
               }}
             >
               홈
             </Menu.Item>
-            <SubMenu key="sub2" title="대시보드" style={{ color: 'white' }}>
+            <SubMenu key="2" title="대시보드" style={{ color: 'white' }}>
               {dashboardSubMenuInfo.map((item, index) => {
                 return (
                   <Menu.Item
-                    key={item.title}
+                    key={`sub${index}`}
                     onClick={() => navigate(item.path)}
                     style={{
                       color: 'white',
                       backgroundColor:
-                        selectedItem === item.title ? '#4D61FF' : '#100E66',
+                        selectedItem === `sub${index}` ? '#4D61FF' : '#100E66',
                       margin: 0,
                     }}
                   >
@@ -77,7 +75,6 @@ const DashboardLayout = () => {
         </Sider>
         <Layout>
           <Content
-            className="site-layout-background"
             style={{
               padding: 24,
               margin: 0,
