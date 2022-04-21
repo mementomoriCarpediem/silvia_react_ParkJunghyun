@@ -15,6 +15,8 @@ import DonutChart from '@/components/DonutChart';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { breakpoints } from '@/constants/breakpoints';
 
+import styles from '@/pages/dashboard/summary/Summary.module.less';
+
 const summaryPrimaryStatisticsData = [
   {
     title: '평균 출석일 수',
@@ -60,16 +62,16 @@ function Summary() {
       <Row
         gutter={[16, 16]}
         style={{ marginBottom: 32 }}
-        className="summary_upperlow"
+        className={styles.summary_upperlow}
       >
         {summaryPrimaryStatisticsData.map((item) => {
           return (
             <Col key={item.title} xs={24} md={12} lg={8}>
-              <Space className="statisticContainer">
+              <Space className={styles.statisticContainer}>
                 {item.img}
                 <Statistic
                   title={
-                    <Typography className="statisticTitle">
+                    <Typography className={styles.statisticTitle}>
                       {item.title}
                     </Typography>
                   }
@@ -86,7 +88,7 @@ function Summary() {
           );
         })}
       </Row>
-      <Row gutter={[16, 16]} className="summary_downlow">
+      <Row gutter={[16, 16]} className={styles.summary_downlow}>
         {summaryChartData.map((item) => {
           return (
             <Col key={item.title} md={24} lg={12}>
